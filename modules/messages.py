@@ -12,21 +12,6 @@ startMessage = """
 ℹ️Чтобы получить статистику по использованию бота, введите /info.
 """
 
-supportMessage = """
-Если вы хотите помочь проекту, то мы будем очень благодарны за любую материальную поддержку.
-
-Для перевода материальной помощи, используйте следующие реквизиты:    
-
-*BTC:* 
-`bc1q4nsthyzx269709f7hdweh3u49fdmwtn546ycly`
-
-*ETH:* 
-`0x613655F6b5727Bd43dF6470Bd85f5341dF9900B1`
-
-*USDT:*
-`TPPHjsqo7GTa6ut1QRW9raDTeTcKQpRc5W`
-    """
-
 philosopher = "I want you to act as a philosopher. I will provide some topics or questions related to the study of philosophy, and it will be your job to explore these concepts in depth. This could involve conducting research into various philosophical theories, proposing new ideas or finding creative solutions for solving complex problems."
 psychologist = "I want you to act a psychologist. I will provide you my thoughts. I want you to give me scientific suggestions that will make me feel better."
 historian = "I want you to act as a historian. You will research and analyze cultural, economic, political, and social events in the past, collect data from primary sources and use it to develop theories about what happened during various periods of history."

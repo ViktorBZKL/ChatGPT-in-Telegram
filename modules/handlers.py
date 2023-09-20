@@ -2,7 +2,7 @@ import sqlite3
 import logging
 from aiogram import types
 from modules.dispatcher import bot, dp
-from modules.messages import startMessage, supportMessage
+from modules.messages import startMessage
 
 @dp.message_handler(commands=['start', 'help'])
 async def start(message: types.Message):
@@ -15,9 +15,7 @@ async def start(message: types.Message):
             id INTEGER,
             username TEXT,
             tokens BIGINT DEFAULT 0,
-            images BIGINT DEFAULT 0,
-            available_tokens BIGINT default 10000,
-            available_images BIGINT default 5
+            images BIGINT DEFAULT 0
         )""")
 
         connect.commit()
@@ -28,7 +26,7 @@ async def start(message: types.Message):
         data = cursor.fetchone()
         if data is None:
             user_data = [user_id, username]
-            cursor.execute("INSERT INTO login_id VALUES(?, ?, ?, ?, ?, ?);", (*user_data, 0, 0, 10000, 5))
+            cursor.execute("INSERT INTO login_id VALUES(?, ?, ?, ?);", (*user_data, 0, 0))
             connect.commit()
         
         cursor.close()
@@ -42,21 +40,14 @@ async def info(message: types.Message):
         user_id = message.chat.id
         connect = sqlite3.connect('users.db')
         cursor = connect.cursor()
-        cursor.execute(f"SELECT tokens, images, available_tokens, available_images FROM login_id WHERE id = {user_id}")
+        cursor.execute(f"SELECT tokens, images FROM login_id WHERE id = {user_id}")
         result = cursor.fetchone()
         if result:
-            tokens, images, available_tokens, available_images = result
-            await bot.send_message(chat_id=user_id, text=f"Количество использованных токенов: {tokens}\nКоличество созданных изображений: {images}\nОсталось токенов: {max(available_tokens - tokens, 0)}\nОсталось изображений {max(available_images - images, 0)}")
+            tokens, images = result
+            await bot.send_message(chat_id=user_id, text=f"Количество использованных токенов: {tokens}\nКоличество созданных изображений: {images}")
         else:
             await bot.send_message(chat_id=user_id, text="Ваши данные не найдены в базе данных.")
         cursor.close()
         connect.close()
-    except Exception as e:
-        logging.error(f"An error occurred: {repr(e)}")
-
-@dp.message_handler(commands=['support'])
-async def support(message: types.Message):
-    try:
-        await bot.send_message(chat_id=message.chat.id, text=supportMessage.replace(".", "\.").replace("(", "\("), parse_mode='MarkdownV2')
     except Exception as e:
         logging.error(f"An error occurred: {repr(e)}")

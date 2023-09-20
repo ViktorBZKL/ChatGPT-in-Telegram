@@ -2,7 +2,7 @@ import os
 import openai
 import logging
 from dotenv import load_dotenv
-from modules.handlers import start, info, support
+from modules.handlers import start, info
 from modules.roles import role_handler
 from modules.images import paint
 from modules.chatgpt import reset, chat_gpt
@@ -17,7 +17,6 @@ openai.api_key = os.environ.get('OpenAI')
 
 dp.register_message_handler(start, commands=['start', 'help'])
 dp.register_message_handler(info, commands=['info'])
-dp.register_message_handler(support, commands=['support'])
 
 dp.register_message_handler(role_handler, commands=['role'])
 

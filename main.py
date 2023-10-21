@@ -13,7 +13,7 @@ logging.basicConfig(filename='errors/errors.log', level=logging.ERROR, format='%
 load_dotenv()
 
 dp.register_message_handler(start, commands=['start', 'help'])
-dp.register_message_handler(info, commands=['info'])
+# dp.register_message_handler(info, commands=['info'])
 
 dp.register_message_handler(role_handler, commands=['role'])
 

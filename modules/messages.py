@@ -3,13 +3,9 @@ startMessage = """
 
 ✉️ Чтобы получить текстовый ответ, просто напишите в чат ваш вопрос.
 
-🌅 Чтобы сгенерировать изображение, начните свой запрос с /image, а затем следующим сообщением ваш запрос. Лучше писать запросы на английском языке, так изображения получатся наиболее точными и яркими. 
-
 🧙‍♂️ Чтобы задать роль боту, введите команду /role.
 
 🔄 Чтобы создать новую беседу, используйте команду /reset.
-
-ℹ️Чтобы получить статистику по использованию бота, введите /info.
 """
 
 philosopher = "I want you to act as a philosopher. I will provide some topics or questions related to the study of philosophy, and it will be your job to explore these concepts in depth. This could involve conducting research into various philosophical theories, proposing new ideas or finding creative solutions for solving complex problems."

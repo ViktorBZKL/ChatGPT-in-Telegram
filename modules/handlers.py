@@ -13,9 +13,7 @@ async def start(message: types.Message):
 
         cursor.execute("""CREATE TABLE IF NOT EXISTS login_id(
             id INTEGER,
-            username TEXT,
-            tokens BIGINT DEFAULT 0,
-            images BIGINT DEFAULT 0
+            username TEXT
         )""")
 
         connect.commit()
@@ -25,8 +23,7 @@ async def start(message: types.Message):
         cursor.execute(f"SELECT id FROM login_id WHERE id = {user_id}")
         data = cursor.fetchone()
         if data is None:
-            user_data = [user_id, username]
-            cursor.execute("INSERT INTO login_id VALUES(?, ?, ?, ?);", (*user_data, 0, 0))
+            cursor.execute("INSERT INTO login_id VALUES(?, ?);", (user_id, username))
             connect.commit()
         
         cursor.close()

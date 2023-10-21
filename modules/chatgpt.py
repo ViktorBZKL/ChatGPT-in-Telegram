@@ -1,3 +1,4 @@
+import g4f
 import sqlite3
 import openai
 import logging
@@ -20,41 +21,61 @@ async def chat_gpt(message: Message):
         user_id = message.chat.id
         if user_id not in user_messages:
             user_messages[user_id] = []
+        
+        providers = [
+            g4f.Provider.Bing,
+            # g4f.Provider.GeekGpt,
+            g4f.Provider.Liaobots,
+            g4f.Provider.Phind,
+            # g4f.Provider.Raycast,
+            # g4f.Provider.Aivvm,
+            # g4f.Provider.GptChatly,
+            # g4f.Provider.Lockchat,
+            # g4f.Provider.Myshell,
+            g4f.Provider.AItianhu,
+            g4f.Provider.AItianhuSpace,
+            g4f.Provider.AiAsk,
+            g4f.Provider.Aichat,
+            g4f.Provider.ChatBase,
+            g4f.Provider.ChatgptAi,
+            g4f.Provider.ChatgptFree,
+            g4f.Provider.ChatgptX,
+            g4f.Provider.FreeGpt,
+            g4f.Provider.GPTalk,	
+            g4f.Provider.GptForLove,
+            g4f.Provider.GptGo,
+            g4f.Provider.Llama2,
+            g4f.Provider.NoowAi,
+            g4f.Provider.OpenaiChat,
+            g4f.Provider.You,
+            # g4f.Provider.Yqcloud,
+        ]
 
         user_messages[user_id].append({"role": "user", "content": message.text})
+        response = None
+        # for provider in providers:
+        #     try:
+        #         response = await g4f.ChatCompletion.create_async(
+        #             model=g4f.models.default,
+        #             messages=user_messages[user_id],
+        #             provider=provider
+        #         )
+        #         reply = response
+        #         break
+        #     except Exception as e:
+        #         await bot.send_message(chat_id=user_id, text=f"An error occurred: {repr(e)}")
+        #         logging.error(f"An error occurred: {repr(e)}")
+        #         return
+
         try:
-            response = await openai.ChatCompletion.acreate(
-                model="gpt-3.5-turbo",
-                messages=user_messages[user_id]
+            response = await g4f.ChatCompletion.create_async(
+                model=g4f.models.default,
+                messages=user_messages[user_id],
+                provider=g4f.Provider.FreeGpt
             )
-            reply = response.choices[0].message.content
-
-            connect = sqlite3.connect('users.db')
-            cursor = connect.cursor()
-            cursor.execute(f"SELECT tokens FROM login_id WHERE id = {user_id}")
-            result = cursor.fetchone()
-            totalTokens = response.usage["total_tokens"]
-            if result:
-                current_tokens = result[0]
-                new_tokens = totalTokens + current_tokens
-                cursor.execute(f"UPDATE login_id SET tokens = '{new_tokens}' WHERE id = {user_id}")
-            else:
-                cursor.execute(f"UPDATE login_id SET tokens = '{totalTokens}' WHERE id = {user_id}")
-            connect.commit()
-
+            reply = response
         except Exception as e:
-            if "overloaded with other requests" in str(e):
-                await bot.send_message(chat_id=user_id,
-                                text="Бот перегружен. Попробуйте отправить свой запрос позже.")
-            elif "maximum context length is 4097" in str(e):
-                await bot.send_message(chat_id=user_id,
-                                text="Превышена максимальная длина диалога. Был создан новый диалог.")
-                reset(message)
-            elif "please check your plan and billing details" or "The OpenAI account associated with this API key has been deactivated" in str(e):
-                await bot.send_message(chat_id=message.chat.id, text="Бот временно не работает. Идут технические работы.")                
-            else:
-                await bot.send_message(chat_id=user_id,
-                                text="Произошла непредвиденная ошибка в обработке вашего запроса. Пожалуйста, попробуйте еще раз или создайте новый диалог с помощью команды /reset.")
+            await bot.send_message(chat_id=user_id, text=f"An error occurred: {repr(e)}")
             logging.error(f"An error occurred: {repr(e)}")
             return
 

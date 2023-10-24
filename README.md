@@ -19,10 +19,10 @@ python3 main.py
 ## Поддержать разработчика
 Если вам понравился мой бот, то вы можете поблагодарить меня, отправив криптовалюту по следующим адресам:  
 *BTC:* 
-`bc1q4nsthyzx269709f7hdweh3u49fdmwtn546ycly`
+`bc1qhgaxmvec9k8vwapzwg4qy7tkyvwt6wlg339t9k`
 
 *ETH:* 
-`0x613655F6b5727Bd43dF6470Bd85f5341dF9900B1`
+`0x8f6Ed08F130c62f55ad5d15A1404dCc2C473831A`
 
 *USDT (TRC20):*
-`TPPHjsqo7GTa6ut1QRW9raDTeTcKQpRc5W`
+`TDu52ZQemwfm9QpyDVL3qCwEmBJdQiRRxQ`

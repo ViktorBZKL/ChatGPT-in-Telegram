@@ -75,7 +75,7 @@ async def chat_gpt(message: Message):
             )
             reply = response
         except Exception as e:
-            await bot.send_message(chat_id=user_id, text=f"An error occurred: {repr(e)}")
+            await bot.send_message(chat_id=user_id, text=f"Ошибка. Попробуйте позже")
             logging.error(f"An error occurred: {repr(e)}")
             return
 

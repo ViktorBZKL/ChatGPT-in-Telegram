@@ -71,7 +71,7 @@ async def chat_gpt(message: Message):
             response = await g4f.ChatCompletion.create_async(
                 model=g4f.models.default,
                 messages=user_messages[user_id],
-                provider=g4f.Provider.FreeGpt
+                provider=g4f.Provider.GPTalk
             )
             reply = response
         except Exception as e:

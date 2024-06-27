@@ -43,18 +43,7 @@ async def chat_gpt(message: Message):
             connect.commit()
 
         except Exception as e:
-            if "overloaded with other requests" in str(e):
-                await bot.send_message(chat_id=user_id,
-                                text="Бот перегружен. Попробуйте отправить свой запрос позже.")
-            elif "maximum context length is 4097" in str(e):
-                await bot.send_message(chat_id=user_id,
-                                text="Превышена максимальная длина диалога. Был создан новый диалог.")
-                reset(message)
-            elif "please check your plan and billing details" or "The OpenAI account associated with this API key has been deactivated" in str(e):
-                await bot.send_message(chat_id=message.chat.id, text="Бот временно не работает. Идут технические работы.")                
-            else:
-                await bot.send_message(chat_id=user_id,
-                                text="Произошла непредвиденная ошибка в обработке вашего запроса. Пожалуйста, попробуйте еще раз или создайте новый диалог с помощью команды /reset.")
+            await bot.send_message(chat_id=user_id, text="Произошла ошибка. Попробуйте отправить свой запрос позже.")
             logging.error(f"An error occurred: {repr(e)}")
             return
 

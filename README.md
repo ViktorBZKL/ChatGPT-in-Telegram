@@ -10,7 +10,7 @@ pip install -r requirements.txt
 После выполнения данных действий вставьте, полученные ранее ключи в файл `.env`, в переменную `OpenAI` API с сайта OpenAI, в переменную `Bot` соответственно ключ от бота.
 
 ## Использование 
-Теперь вам остается только запустить бота командой:
+Теперь запускаем бота командой:
 ```commandline
 python3 main.py
 ```
@@ -23,6 +23,9 @@ python3 main.py
 
 *ETH:* 
 `0x8f6Ed08F130c62f55ad5d15A1404dCc2C473831A`
+
+*TON:*
+`EQB1FKaobaDg-IGCeKAn9nj87-clD69fbhGvp1-40x-PAvph`
 
 *USDT (TRC20):*
 `TDu52ZQemwfm9QpyDVL3qCwEmBJdQiRRxQ`
